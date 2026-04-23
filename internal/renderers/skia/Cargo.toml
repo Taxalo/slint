@@ -77,7 +77,10 @@ wgpu-27 = { workspace = true, optional = true }
 wgpu-28 = { workspace = true, optional = true }
 spin_on = { version = "0.1", optional = true }
 
-[target.'cfg(any(not(target_vendor = "apple"), target_os = "macos"))'.dependencies]
+[target.'cfg(any(target_os = "macos", target_os = "windows"))'.dependencies]
+glutin = { workspace = true, default-features = false, features = ["egl", "wgl"] }
+
+[target.'cfg(any(not(target_os = "macos"), not(target_os = "windows")))'.dependencies]
 glutin = { workspace = true, default-features = false, features = ["egl", "wgl"] }
 
 [target.'cfg(not(target_os = "android"))'.dependencies]
